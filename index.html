@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ji-Hye Choi, PhD — computational biologist working on single-cell and spatial omics of cancer.">
+<meta property="og:title" content="Ji-Hye Choi, PhD">
+<meta property="og:description" content="Single-cell and spatial omics, cancer genomics, AI for biomedicine.">
+<meta property="og:type" content="website">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Ji-Hye Choi, PhD</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column (≈68ch) under a slim sticky nav; hero pairs the intro with a simulated spatial-omics tissue map. Palette borrows H&E stain: hematoxylin indigo + eosin pink on a cool slide-glass neutral. */
+:root{
+  --bg:#f6f6f9; --surface:#ffffff; --fg:#1b1b2a; --muted:#5d5d73; --rule:#dedeea;
+  --hema:#3c3f99; --eosin:#c0457a; --c3:#2f8f86; --c4:#d08a2c; --c5:#7a5bb5; --cell-bg:#ececf4;
+  --display:"Newsreader", "Iowan Old Style", Georgia, serif;
+  --body:"IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --step--1:.8125rem; --step0:1rem; --step1:1.2rem; --step2:1.6rem; --step3:2.6rem;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#13131c; --surface:#1b1b27; --fg:#e8e8f2; --muted:#a2a2bb; --rule:#2e2e40;
+  --hema:#9ea2ff; --eosin:#f08ab4; --c3:#5cc8bc; --c4:#e9b05e; --c5:#b59bf0; --cell-bg:#22222f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#13131c; --surface:#1b1b27; --fg:#e8e8f2; --muted:#a2a2bb; --rule:#2e2e40;
+  --hema:#9ea2ff; --eosin:#f08ab4; --c3:#5cc8bc; --c4:#e9b05e; --c5:#b59bf0; --cell-bg:#22222f; color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:var(--step0);line-height:1.65}
+#page[data-lang="en"] .ko, #page[data-lang="ko"] .en{display:none}
+a{color:var(--hema);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--eosin)}
+a:focus-visible, button:focus-visible{outline:2px solid var(--eosin);outline-offset:2px;border-radius:2px}
+.wrap{max-width:56rem;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;gap:1rem;padding-block:.6rem;flex-wrap:wrap}
+.nav .brand{font-family:var(--display);font-size:var(--step1);color:var(--fg);text-decoration:none;margin-right:auto}
+.nav ul{display:flex;gap:1rem;list-style:none;margin:0;padding:0;flex-wrap:wrap;font-size:var(--step--1)}
+.nav ul a{color:var(--muted);text-decoration:none}
+.nav ul a:hover{color:var(--fg)}
+.lang{display:flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.lang button{font:500 var(--step--1)/1 var(--mono);background:none;border:0;color:var(--muted);padding:.35rem .55rem;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2.5rem;align-items:center;padding-block:3.5rem 2.5rem}
+.hero h1{font-family:var(--display);font-weight:500;font-size:var(--step3);line-height:1.05;margin:0 0 .3rem;text-wrap:balance;letter-spacing:-.01em}
+.hero .kname{font-size:var(--step1);color:var(--muted);margin:0 0 1rem}
+.hero .role-line{margin:0 0 .6rem;color:var(--muted)}
+.hero .affil{margin:0 0 1.2rem;font-size:.9rem;color:var(--muted);line-height:1.5}
+.hero .role-line strong{color:var(--fg);font-weight:600}
+.hero p.lede{margin:0 0 1.4rem;max-width:62ch}
+.links{display:flex;flex-wrap:wrap;gap:.5rem;padding:0;margin:0;list-style:none}
+.links a{display:inline-block;font:500 var(--step--1)/1 var(--mono);padding:.5rem .7rem;border:1px solid var(--rule);border-radius:4px;color:var(--fg);text-decoration:none;background:var(--surface)}
+.links a:hover{border-color:var(--hema);color:var(--hema)}
+figure.portrait{margin:0;justify-self:end;width:100%;max-width:13.5rem;position:relative}
+figure.portrait img{position:relative;display:block;width:100%;height:auto;aspect-ratio:342/460;object-fit:cover;border-radius:1.25rem;background:var(--cell-bg)}
+
+/* tabs */
+.tabs{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 3rem);z-index:4;display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;background:var(--bg);border-bottom:1px solid var(--rule);margin-bottom:.4rem}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;font:500 .95rem/1 var(--body);background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:.85rem .9rem;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tabs button:hover{color:var(--fg)}
+.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--eosin)}
+.tabs .count{font:500 .72rem/1 var(--mono);color:var(--muted);background:var(--cell-bg);border-radius:999px;padding:.15rem .4rem;margin-left:.2rem}
+
+/* sections */
+section{padding-block:1.8rem 3rem;min-height:40vh}
+h2{font-family:var(--display);font-weight:500;font-size:var(--step2);margin:0 0 1.2rem;display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap}
+h2 small{font:400 var(--step--1)/1 var(--mono);color:var(--muted);letter-spacing:.04em}
+h3{font-size:var(--step0);font-weight:600;margin:0 0 .35rem}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6rem 2rem}
+.theme p{margin:0;color:var(--muted);font-size:.95rem}
+.theme .key{display:block;margin-top:.5rem;font:var(--step--1)/1.5 var(--mono);color:var(--fg)}
+.theme h3::before{content:"";display:inline-block;width:.6rem;height:.6rem;border-radius:50%;margin-right:.5rem;vertical-align:.05em;background:var(--dot)}
+
+/* publications */
+.stats{display:flex;gap:2rem;flex-wrap:wrap;margin:0 0 1.2rem;font-family:var(--mono);font-size:var(--step--1);color:var(--muted)}
+.stats b{display:block;font:500 var(--step2)/1.1 var(--display);color:var(--fg);font-variant-numeric:tabular-nums}
+.filter{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
+.filter button{font:500 var(--step--1)/1 var(--body);padding:.45rem .8rem;border-radius:999px;border:1px solid var(--rule);background:var(--surface);color:var(--muted);cursor:pointer}
+.filter button[aria-pressed="true"]{border-color:var(--hema);color:var(--hema);background:color-mix(in srgb, var(--hema) 10%, var(--surface))}
+ol.pubs{list-style:none;margin:0;padding:0;display:grid;gap:1.1rem}
+.pub{display:grid;grid-template-columns:3.2rem minmax(0,1fr);gap:.8rem}
+.pub-year{font:500 var(--step--1)/1.9 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.pub-body p{margin:0}
+.pub-title{font-weight:500}
+.pub-authors{color:var(--muted);font-size:.9rem}
+.pub-authors .me{color:var(--fg);font-weight:600}
+.pub-meta{font-size:.875rem;color:var(--muted);overflow-wrap:anywhere}
+.role{font:500 .72rem/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--eosin);border:1px solid currentColor;border-radius:3px;padding:.15rem .35rem;margin-left:.3rem;white-space:nowrap}
+#pubs[data-filter="lead"] .pub[data-role="other"]{display:none}
+
+/* software */
+.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.tool{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:1rem}
+.tool h3{font-family:var(--mono);font-weight:500}
+.tool p{margin:0;font-size:.9rem;color:var(--muted)}
+.tool .src{display:block;margin-top:.5rem;font-size:var(--step--1)}
+
+/* timeline */
+dl.tl{display:grid;grid-template-columns:9.5rem minmax(0,1fr);gap:.9rem 1.5rem;margin:0}
+dl.tl dt{font:var(--step--1)/1.9 var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+dl.tl dd{margin:0}
+dl.tl dd span{display:block;color:var(--muted);font-size:.9rem}
+.todo{background:color-mix(in srgb, var(--c4) 22%, transparent);border-radius:3px;padding:0 .25rem}
+footer{border-top:1px solid var(--rule);padding-block:1.6rem 2.4rem;font:var(--step--1)/1.6 var(--mono);color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+@media (max-width:720px){
+  .hero{grid-template-columns:1fr;padding-block:2.2rem 1.6rem}
+  figure.portrait{max-width:10rem;justify-self:start;order:-1;margin-right:.7rem}
+  .grid2,.tools{grid-template-columns:1fr}
+  dl.tl{grid-template-columns:1fr;gap:.1rem}
+  dl.tl dd{margin-bottom:.8rem}
+  :root{--step3:2.1rem}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+
+</style>
+</head>
+<body>
+
+<div id="page" data-lang="en">
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Ji-Hye Choi</a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-en" aria-pressed="true">EN</button>
+      <button type="button" id="lang-ko" aria-pressed="false">KO</button>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <h1>Ji-Hye Choi, PhD</h1>
+      <p class="kname">최지혜</p>
+      <p class="role-line">
+        <span class="en"><strong>Computational biologist</strong> · single-cell &amp; spatial omics of cancer</span>
+        <span class="ko"><strong>생명정보학·계산생물학 연구자</strong> · 암 단일세포·공간 오믹스</span>
+      </p>
+      <p class="affil">
+        <span class="en">Visiting Scholar, Cedars-Sinai Medical Center, Los Angeles<br>Research Associate Professor, Ajou University School of Medicine</span>
+        <span class="ko">미국 시더스-사이나이 메디컬 센터 방문연구원<br>아주대학교 의과대학 연구부교수</span>
+      </p>
+      <p class="lede en">I build computational methods and resources to read tumors one cell at a time. My work combines single-cell and spatial transcriptomics with cancer genomics and pharmacogenomics to map how tumor ecosystems evolve and to find therapeutic opportunities, from stepwise progression of head and neck and liver cancer to drug repositioning and AI agents for biomedical analysis.</p>
+      <p class="lede ko">암 조직을 세포 단위로 읽어 내는 계산 방법과 자원을 만듭니다. 단일세포·공간전사체 데이터를 암 유전체·약물유전체와 통합해 종양 생태계가 어떻게 진화하는지 밝히고, 두경부암·간암의 단계적 진행 연구부터 약물 재창출, 생의학 분석용 AI 에이전트까지 치료 기회를 찾는 연구를 하고 있습니다.</p>
+      <ul class="links">
+        <li><a href="https://scholar.google.com/citations?user=zL4CkBQAAAAJ&amp;hl=en" rel="noopener">Google Scholar</a></li>
+        <li><a href="https://github.com/jiheahihi" rel="noopener">GitHub</a></li>
+      </ul>
+    </div>
+    <figure class="portrait">
+      <img src="data:image/jpeg;base64,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" alt="Portrait of Ji-Hye Choi" width="342" height="460">
+    </figure>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" id="tab-research" aria-controls="research" aria-selected="true"><span class="en">Research</span><span class="ko">연구</span></button>
+    <button type="button" role="tab" id="tab-publications" aria-controls="publications" aria-selected="false"><span class="en">Publications</span><span class="ko">논문</span> <span class="count">27</span></button>
+    <button type="button" role="tab" id="tab-software" aria-controls="software" aria-selected="false"><span class="en">Software</span><span class="ko">소프트웨어</span></button>
+    <button type="button" role="tab" id="tab-experience" aria-controls="experience" aria-selected="false"><span class="en">Experience</span><span class="ko">경력</span></button>
+    <button type="button" role="tab" id="tab-education" aria-controls="education" aria-selected="false"><span class="en">Education</span><span class="ko">학력</span></button>
+    <button type="button" role="tab" id="tab-awards" aria-controls="awards" aria-selected="false"><span class="en">Awards</span><span class="ko">수상</span></button>
+  </div>
+
+  <section id="research" role="tabpanel" aria-labelledby="tab-research">
+    <h2><span class="en">Research</span><span class="ko">연구 주제</span></h2>
+    <div class="grid2">
+      <div class="theme" style="--dot:var(--hema)">
+        <h3><span class="en">Single-cell &amp; spatial tumor ecosystems</span><span class="ko">단일세포·공간 종양 생태계</span></h3>
+        <p class="en">Cell-state atlases and spatial niches (Xenium, Visium) of head and neck, lung and liver cancers; tumor–immune–stromal interactions.</p>
+        <p class="ko">두경부암·폐암·간암의 세포 상태 지도와 공간 니치(Xenium, Visium), 종양–면역–기질 상호작용.</p>
+        <span class="key">Nat Commun 2023 · CCIDB 2023</span>
+      </div>
+      <div class="theme" style="--dot:var(--eosin)">
+        <h3><span class="en">Cancer genomics &amp; multi-omics</span><span class="ko">암 유전체·멀티오믹스</span></h3>
+        <p class="en">Integrating genomic, epigenomic and transcriptomic aberrations along stepwise carcinogenesis and recurrence.</p>
+        <p class="ko">단계적 발암과 재발 과정의 유전체·후성유전체·전사체 이상을 통합 분석.</p>
+        <span class="key">Cancer Res 2019 · Nat Commun 2017</span>
+      </div>
+      <div class="theme" style="--dot:var(--c3)">
+        <h3><span class="en">Pharmacogenomics &amp; drug repositioning</span><span class="ko">약물유전체·약물 재창출</span></h3>
+        <p class="en">Connecting tumor cell states to drug response, connectivity-map screening and safety evidence to prioritize repurposable compounds.</p>
+        <p class="ko">종양 세포 상태와 약물 반응을 연결하고, CMap 스크리닝과 안전성 근거로 재창출 후보를 우선순위화.</p>
+        <span class="key">CGV 2022 · Oncogene 2018</span>
+      </div>
+      <div class="theme" style="--dot:var(--c5)">
+        <h3><span class="en">Bioinformatics tools &amp; AI for biomedicine</span><span class="ko">분석 도구·의생명 AI</span></h3>
+        <p class="en">Reusable pipelines, databases and web services, and LLM-based agents that automate multi-step omics analysis.</p>
+        <p class="ko">재사용 가능한 파이프라인·데이터베이스·웹 서비스, 다단계 오믹스 분석을 자동화하는 LLM 기반 에이전트.</p>
+        <span class="key">scTyper 2020 · SEQprocess 2019 · NeuroFANN 2025</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications" role="tabpanel" aria-labelledby="tab-publications" hidden>
+    <h2><span class="en">Publications</span><span class="ko">논문</span> <small>2012 – 2025</small></h2>
+    <div class="stats">
+      <div><b>27</b><span class="en">peer-reviewed papers</span><span class="ko">국제 학술지 논문</span></div>
+      <div><b>11</b><span class="en">first / co-first author</span><span class="ko">제1·공동제1저자</span></div>
+    </div>
+    <div class="filter" role="group" aria-label="Filter publications">
+      <button type="button" id="f-all" aria-pressed="true"><span class="en">All</span><span class="ko">전체</span></button>
+      <button type="button" id="f-lead" aria-pressed="false"><span class="en">First &amp; co-first</span><span class="ko">제1·공동제1저자</span></button>
+    </div>
+    <ol class="pubs" id="pubs" data-filter="all" reversed>
+<li class="pub" data-role="other"><span class="pub-year">2025</span><div class="pub-body"><p class="pub-title">Peptide-based therapeutics targeting the SLC39A14-PIWIL2 fusion in hepatocellular carcinoma.</p><p class="pub-authors">Shah M, Moon SU, <b class="me">Choi JH</b>, Kim MJ, Woo HG.</p><p class="pub-meta"><i>Genomics Inform</i> 2025;23(1):28 · <a href="https://doi.org/10.1186/s44342-025-00060-5" rel="noopener">doi:10.1186/s44342-025-00060-5</a> </p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2025</span><div class="pub-body"><p class="pub-title">NeuroFANN: identification of neuropathological subtypes in dementia with plasma proteins by using functionally annotated neural network.</p><p class="pub-authors">Park SH, Kim DY, <b class="me">Choi JH</b>, Hong CH, Son SJ, Rho HW, Shin HJ, Woo HG.</p><p class="pub-meta"><i>Brief Bioinform</i> 2025;26(4):bbaf366 · <a href="https://doi.org/10.1093/bib/bbaf366" rel="noopener">doi:10.1093/bib/bbaf366</a> </p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2025</span><div class="pub-body"><p class="pub-title">The role of 7-dehydrocholesterol in inducing ER stress and apoptosis of head and neck squamous cell carcinoma.</p><p class="pub-authors">Lee BS, Park YI, Liu H, Kim SG, Kim HJ, <b class="me">Choi JH</b>, Rho SH, Padilla J, Roh J, Woo HG, Seo HJ, Choi MH, Jeong YJ, Lien EC, Mehdi SH, Lee DJ, Yoon DH, Kim CH, Lee J.</p><p class="pub-meta"><i>Cancer Lett</i> 2025;628:217842 · <a href="https://doi.org/10.1016/j.canlet.2025.217842" rel="noopener">doi:10.1016/j.canlet.2025.217842</a> </p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2025</span><div class="pub-body"><p class="pub-title">KF-NIPT: K-mer and fetal fraction-based estimation of chromosomal anomaly from NIPT data.</p><p class="pub-authors">Kim D, Sohn JY, Cho JH, <b class="me">Choi JH</b>, Oh G, Woo HG.</p><p class="pub-meta"><i>BMC Bioinformatics</i> 2025;26(1):133 · <a href="https://doi.org/10.1186/s12859-025-06127-y" rel="noopener">doi:10.1186/s12859-025-06127-y</a> </p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2025</span><div class="pub-body"><p class="pub-title">Pan-variant SARS-CoV-2 vaccines induce protective immunity by targeting conserved epitopes.</p><p class="pub-authors">Shah M, Moon SU, Shin JY, <b class="me">Choi JH</b>, Kim D, Woo HG.</p><p class="pub-meta"><i>Adv Sci</i> 2025;12(16):e2409919 · <a href="https://doi.org/10.1002/advs.202409919" rel="noopener">doi:10.1002/advs.202409919</a> </p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2024</span><div class="pub-body"><p class="pub-title">Immune checkpoint inhibitor monotherapy is sufficient to promote microenvironmental normalization via the type I interferon pathway in PD-L1-expressing head and neck cancer.</p><p class="pub-authors">Jang JY, Lee BS, Huang M, Seo C, <b class="me">Choi JH</b>, Shin YS, Woo HG, Kim CH.</p><p class="pub-meta"><i>Mol Oncol</i> 2024;18(8):1923-1939 · <a href="https://doi.org/10.1002/1878-0261.13633" rel="noopener">doi:10.1002/1878-0261.13633</a> </p></div></li>
+<li class="pub" data-role="first"><span class="pub-year">2023</span><div class="pub-body"><p class="pub-title">Single-cell transcriptome profiling of the stepwise progression of head and neck cancer.</p><p class="pub-authors"><b class="me">Choi JH</b>, Lee BS, Jang JY, Lee YS, Kim HJ, Roh J, Shin YS, Woo HG, Kim CH.</p><p class="pub-meta"><i>Nat Commun</i> 2023;14(1):1055 · <a href="https://doi.org/10.1038/s41467-023-36691-x" rel="noopener">doi:10.1038/s41467-023-36691-x</a> <span class="role">First author</span></p></div></li>
+<li class="pub" data-role="co-first"><span class="pub-year">2023</span><div class="pub-body"><p class="pub-title">CCIDB: a manually curated cell-cell interaction database with cell context information.</p><p class="pub-authors">Noh JY, Lee HI, <b class="me">Choi JH</b>, Cho SH, Yi YH, Lim JH, Myung EB, Shin YJ, Shin HJ, Woo HG.</p><p class="pub-meta"><i>Database (Oxford)</i> 2023:baad057 · <a href="https://doi.org/10.1093/database/baad057" rel="noopener">doi:10.1093/database/baad057</a> <span class="role">Co-first author</span></p></div></li>
+<li class="pub" data-role="first"><span class="pub-year">2022</span><div class="pub-body"><p class="pub-title">CGV: Cancer Genome Viewer, a web service for integrative cancer genome and pharmacogenomic data analysis.</p><p class="pub-authors"><b class="me">Choi JH</b>, Choi HS, Cho SH, Lee JH, Woo HG.</p><p class="pub-meta"><i>Bioinformatics</i> 2022;38(22):5146 · <a href="https://doi.org/10.1093/bioinformatics/btac642" rel="noopener">doi:10.1093/bioinformatics/btac642</a> <span class="role">First author</span></p></div></li>
+<li class="pub" data-role="first"><span class="pub-year">2021</span><div class="pub-body"><p class="pub-title">TPRG1-AS1 induces RBM24 expression and inhibits liver cancer progression by sponging miR-4691-5p and miR-3659.</p><p class="pub-authors"><b class="me">Choi JH</b>, Kwon SM, Moon SU, Yoon S, Shah M, Lee BG, Yang J, Park YN, Wang HJ, Woo HG.</p><p class="pub-meta"><i>Liver Int</i> 2021 · <a href="https://doi.org/10.1111/liv.15026" rel="noopener">doi:10.1111/liv.15026</a> <span class="role">First author</span></p></div></li>
+<li class="pub" data-role="co-first"><span class="pub-year">2021</span><div class="pub-body"><p class="pub-title">USO1 isoforms differentially promote liver cancer progression by dysregulating the ER-Golgi network.</p><p class="pub-authors">Yoon S, <b class="me">Choi JH</b>, Shah M, Kwon SM, Yang J, Park YN, Wang HJ, Woo HG.</p><p class="pub-meta"><i>Carcinogenesis</i> 2021 · <a href="https://doi.org/10.1093/carcin/bgab067" rel="noopener">doi:10.1093/carcin/bgab067</a> <span class="role">Co-first author</span></p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2020</span><div class="pub-body"><p class="pub-title">MLH1 single-nucleotide variant in circulating tumor DNA predicts overall survival of patients with hepatocellular carcinoma.</p><p class="pub-authors">Kim SS, Eun JW, <b class="me">Choi JH</b>, Woo HG, Cho HJ, Ahn HR, Suh CW, Baek GO, Cho SW, Cheong JY.</p><p class="pub-meta"><i>Sci Rep</i> 2020;10(1):17862 · <a href="https://doi.org/10.1038/s41598-020-74494-y" rel="noopener">doi:10.1038/s41598-020-74494-y</a> </p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2020</span><div class="pub-body"><p class="pub-title">PCAF-mediated histone acetylation promotes replication fork degradation by MRE11 and EXO1 in BRCA-deficient cells.</p><p class="pub-authors">Kim JJ, Lee SY, <b class="me">Choi JH</b>, Woo HG, Xhemalce B, Miller KM.</p><p class="pub-meta"><i>Mol Cell</i> 2020;80(2):327-344 · <a href="https://doi.org/10.1016/j.molcel.2020.08.018" rel="noopener">doi:10.1016/j.molcel.2020.08.018</a> </p></div></li>
+<li class="pub" data-role="first"><span class="pub-year">2020</span><div class="pub-body"><p class="pub-title">scTyper: a comprehensive pipeline for the cell typing analysis of single-cell RNA-seq data.</p><p class="pub-authors"><b class="me">Choi JH</b>, Kim HI, Woo HG.</p><p class="pub-meta"><i>BMC Bioinformatics</i> 2020;21(1):342 · <a href="https://doi.org/10.1186/s12859-020-03700-5" rel="noopener">doi:10.1186/s12859-020-03700-5</a> <span class="role">First author</span></p></div></li>
+<li class="pub" data-role="co-first"><span class="pub-year">2019</span><div class="pub-body"><p class="pub-title">Dynamics of genomic, epigenomic, and transcriptomic aberrations during stepwise hepatocarcinogenesis.</p><p class="pub-authors">Jee BA, <b class="me">Choi JH</b>, Rhee H, Yoon S, Kwon SM, Nahm JH, Yoo JE, Jeon Y, Choi GH, Woo HG, Park YN.</p><p class="pub-meta"><i>Cancer Res</i> 2019;79(21):5500-5512 · <a href="https://doi.org/10.1158/0008-5472.CAN-19-0991" rel="noopener">doi:10.1158/0008-5472.CAN-19-0991</a> <span class="role">Co-first author</span></p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2019</span><div class="pub-body"><p class="pub-title">EPHB6 mutation induces cell adhesion-mediated paclitaxel resistance via EPHA2 and CDH11 expression.</p><p class="pub-authors">Yoon S, <b class="me">Choi JH</b>, Kim SJ, Lee EJ, Shah M, Choi S, Woo HG.</p><p class="pub-meta"><i>Exp Mol Med</i> 2019;51(6):1-12 · <a href="https://doi.org/10.1038/s12276-019-0261-z" rel="noopener">doi:10.1038/s12276-019-0261-z</a> </p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2019</span><div class="pub-body"><p class="pub-title">SEQprocess: a modularized and customizable pipeline framework for NGS processing in R package.</p><p class="pub-authors">Joo T, <b class="me">Choi JH</b>, Lee JH, Park SE, Jeon Y, Jung SH, Woo HG.</p><p class="pub-meta"><i>BMC Bioinformatics</i> 2019;20(1):90 · <a href="https://doi.org/10.1186/s12859-019-2676-x" rel="noopener">doi:10.1186/s12859-019-2676-x</a> </p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2018</span><div class="pub-body"><p class="pub-title">Identification of novel susceptibility loci associated with hepatitis B surface antigen seroclearance in chronic hepatitis B.</p><p class="pub-authors">Kim TH, Lee EJ, <b class="me">Choi JH</b>, Yim SY, Lee S, Kang J, Lee YR, Lee HA, Choi HS, Kim ES, Keum B, Seo YS, Yim HJ, Jeen YT, Chun HJ, Lee HS, Kim CD, Woo HG, Um SH.</p><p class="pub-meta"><i>PLoS One</i> 2018;13(7):e0199094 · <a href="https://pubmed.ncbi.nlm.nih.gov/29975729/" rel="noopener">PMID 29975729</a> </p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2018</span><div class="pub-body"><p class="pub-title">Recapitulation of pharmacogenomic data reveals that invalidation of SULF2 enhance sorafenib susceptibility in liver cancer.</p><p class="pub-authors">Yoon S, Lee EJ, <b class="me">Choi JH</b>, Chung T, Kim DY, Im JY, Bae MH, Kwon JH, Kim HH, Kim HC, Park YN, Wang HJ, Woo HG.</p><p class="pub-meta"><i>Oncogene</i> 2018;37(32):4443-4454 · <a href="https://pubmed.ncbi.nlm.nih.gov/29720727/" rel="noopener">PMID 29720727</a> </p></div></li>
+<li class="pub" data-role="first"><span class="pub-year">2018</span><div class="pub-body"><p class="pub-title">Identification of genomic aberrations associated with lymph node metastasis in diffuse-type gastric cancer.</p><p class="pub-authors"><b class="me">Choi JH</b>, Kim YB, Ahn JM, Kim MJ, Bae WJ, Han SU, Woo HG, Lee D.</p><p class="pub-meta"><i>Exp Mol Med</i> 2018;50(4):6 · <a href="https://pubmed.ncbi.nlm.nih.gov/29622765/" rel="noopener">PMID 29622765</a> <span class="role">First author</span></p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2018</span><div class="pub-body"><p class="pub-title">Keratin 19 expression in hepatocellular carcinoma is regulated by fibroblast-derived HGF via a MET-ERK1/2-AP1 and SP1 axis.</p><p class="pub-authors">Rhee H, Kim HY, <b class="me">Choi JH</b>, Woo HG, Yoo JE, Nahm JH, Choi JS, Park YN.</p><p class="pub-meta"><i>Cancer Res</i> 2018;78(7):1619-1631 · <a href="https://pubmed.ncbi.nlm.nih.gov/29363547/" rel="noopener">PMID 29363547</a> </p></div></li>
+<li class="pub" data-role="co-first"><span class="pub-year">2017</span><div class="pub-body"><p class="pub-title">A genome-wide association study identifies UTRN gene polymorphism for restless legs syndrome in a Korean population.</p><p class="pub-authors">Cho CH, <b class="me">Choi JH</b>, Kang SG, Yoon HK, Park YM, Moon JH, Jung KY, Han JK, Shin HB, Noh HJ, Koo YS, Kim L, Woo HG, Lee HJ.</p><p class="pub-meta"><i>Psychiatry Investig</i> 2017;14(6):830-838 · <a href="https://pubmed.ncbi.nlm.nih.gov/29209388/" rel="noopener">PMID 29209388</a> <span class="role">Co-first author</span></p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2017</span><div class="pub-body"><p class="pub-title">Integrative analysis of genomic and epigenomic regulation of the transcriptome in liver cancer.</p><p class="pub-authors">Woo HG, <b class="me">Choi JH</b>, Yoon S, Jee BA, Cho EJ, Lee JH, Yu SJ, Yoon JH, Yi NJ, Lee KW, Suh KS, Kim YJ.</p><p class="pub-meta"><i>Nat Commun</i> 2017;8(1):839 · <a href="https://pubmed.ncbi.nlm.nih.gov/29018224/" rel="noopener">PMID 29018224</a> </p></div></li>
+<li class="pub" data-role="first"><span class="pub-year">2017</span><div class="pub-body"><p class="pub-title">Pan-cancer analysis of systematic batch effects on somatic sequence variations.</p><p class="pub-authors"><b class="me">Choi JH</b>, Hong SE, Woo HG.</p><p class="pub-meta"><i>BMC Bioinformatics</i> 2017;18(1):211 · <a href="https://pubmed.ncbi.nlm.nih.gov/28399795/" rel="noopener">PMID 28399795</a> <span class="role">First author</span></p></div></li>
+<li class="pub" data-role="first"><span class="pub-year">2017</span><div class="pub-body"><p class="pub-title">Mutations acquired by hepatocellular carcinoma recurrence give rise to an aggressive phenotype.</p><p class="pub-authors"><b class="me">Choi JH</b>, Kim MJ, Park YK, Im JY, Kwon SM, Kim HC, Woo HG, Wang HJ.</p><p class="pub-meta"><i>Oncotarget</i> 2017;8(14):22903-22916 · <a href="https://pubmed.ncbi.nlm.nih.gov/28038442/" rel="noopener">PMID 28038442</a> <span class="role">First author</span></p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2015</span><div class="pub-body"><p class="pub-title">CDH13 and HCRTR2 may be associated with hypersomnia symptom of bipolar depression: a genome-wide functional enrichment pathway analysis.</p><p class="pub-authors">Cho CH, Lee HJ, Woo HG, <b class="me">Choi JH</b>, Greenwood TA, Kelsoe JR.</p><p class="pub-meta"><i>Psychiatry Investig</i> 2015;12(3):402-7 · <a href="https://pubmed.ncbi.nlm.nih.gov/26207136/" rel="noopener">PMID 26207136</a> </p></div></li>
+<li class="pub" data-role="other"><span class="pub-year">2012</span><div class="pub-body"><p class="pub-title">Perspectives of integrative cancer genomics in next generation sequencing era.</p><p class="pub-authors">Kwon SM, Cho H, <b class="me">Choi JH</b>, Jee BA, Jo Y, Woo HG.</p><p class="pub-meta"><i>Genomics Inform</i> 2012;10(2):69-73 · <a href="https://pubmed.ncbi.nlm.nih.gov/23105932/" rel="noopener">PMID 23105932</a> </p></div></li>
+    </ol>
+  </section>
+
+  <section id="software" role="tabpanel" aria-labelledby="tab-software" hidden>
+    <h2><span class="en">Software &amp; databases</span><span class="ko">소프트웨어·데이터베이스</span></h2>
+    <div class="tools">
+      <div class="tool"><h3>scTyper</h3><p class="en">Cell-typing pipeline for single-cell RNA-seq with curated marker databases.</p><p class="ko">마커 DB 기반 단일세포 RNA-seq 세포 유형 분류 파이프라인.</p><a class="src" href="https://doi.org/10.1186/s12859-020-03700-5" rel="noopener">BMC Bioinformatics 2020</a></div>
+      <div class="tool"><h3>CGV</h3><p class="en">Cancer Genome Viewer: web service for integrative cancer genome and pharmacogenomic analysis.</p><p class="ko">암 유전체·약물유전체 통합 분석 웹 서비스.</p><a class="src" href="https://doi.org/10.1093/bioinformatics/btac642" rel="noopener">Bioinformatics 2022</a></div>
+      <div class="tool"><h3>CCIDB</h3><p class="en">Curated cell–cell interaction database with cell-context information.</p><p class="ko">세포 맥락 정보를 담은 세포 간 상호작용 큐레이션 DB.</p><a class="src" href="https://doi.org/10.1093/database/baad057" rel="noopener">Database 2023</a></div>
+      <div class="tool"><h3>SEQprocess</h3><p class="en">Modular, customizable NGS processing framework in R.</p><p class="ko">모듈형 NGS 처리 R 패키지 프레임워크.</p><a class="src" href="https://doi.org/10.1186/s12859-019-2676-x" rel="noopener">BMC Bioinformatics 2019</a></div>
+      <div class="tool"><h3>KF-NIPT</h3><p class="en">K-mer and fetal-fraction estimation of chromosomal anomalies from NIPT data.</p><p class="ko">k-mer와 태아 분율 기반 NIPT 염색체 이상 추정.</p><a class="src" href="https://doi.org/10.1186/s12859-025-06127-y" rel="noopener">BMC Bioinformatics 2025</a></div>
+      <div class="tool"><h3>NeuroFANN</h3><p class="en">Functionally annotated neural network for dementia subtypes from plasma proteins.</p><p class="ko">혈장 단백질로 치매 신경병리 아형을 찾는 기능 주석 신경망.</p><a class="src" href="https://doi.org/10.1093/bib/bbaf366" rel="noopener">Brief Bioinform 2025</a></div>
+    </div>
+  </section>
+
+  <section id="experience" role="tabpanel" aria-labelledby="tab-experience" hidden>
+    <h2><span class="en">Experience</span><span class="ko">경력</span></h2>
+    <dl class="tl">
+      <dt>2026.07 – 2026.12</dt>
+      <dd><span class="en"><b>Visiting Scholar</b></span><span class="ko"><b>방문연구원</b></span><span class="en">Cedars-Sinai Medical Center, Los Angeles, CA, USA</span><span class="ko">시더스-사이나이 메디컬 센터 (미국 캘리포니아주 로스앤젤레스)</span></dd>
+      <dt>2021.03 – present</dt>
+      <dd><span class="en"><b>Research Associate Professor</b></span><span class="ko"><b>연구부교수</b></span><span class="en">Department of Physiology, Ajou University School of Medicine</span><span class="ko">아주대학교 의과대학 생리학교실</span></dd>
+      <dt>2017.09 – 2021.02</dt>
+      <dd><span class="en"><b>Research Fellow</b></span><span class="ko"><b>박사후연구원</b></span><span class="en">Department of Physiology, Ajou University School of Medicine</span><span class="ko">아주대학교 의과대학 생리학교실</span></dd>
+      <dt>2011.11 – 2012.08</dt>
+      <dd><span class="en"><b>Research Assistant</b></span><span class="ko"><b>연구원</b></span><span class="en">Department of Physiology, Ajou University School of Medicine</span><span class="ko">아주대학교 의과대학 생리학교실</span></dd>
+    </dl>
+  </section>
+
+  <section id="education" role="tabpanel" aria-labelledby="tab-education" hidden>
+    <h2><span class="en">Education</span><span class="ko">학력</span></h2>
+    <dl class="tl">
+      <dt>2012 – 2017</dt>
+      <dd><b>Ph.D., Biomedical Informatics</b><span class="en">Ajou University School of Medicine, Suwon</span><span class="ko">아주대학교 의과대학 의생명정보학 박사</span></dd>
+      <dt>2010 – 2012</dt>
+      <dd><b>M.S., Bioinformatics</b><span class="en">Dankook University, Cheonan</span><span class="ko">단국대학교 생물정보학 석사</span></dd>
+      <dt>2006 – 2010</dt>
+      <dd><b>B.S., Computer Science</b><span class="en">Dankook University, Cheonan</span><span class="ko">단국대학교 컴퓨터과학 학사</span></dd>
+    </dl>
+  </section>
+
+  <section id="awards" role="tabpanel" aria-labelledby="tab-awards" hidden>
+    <h2><span class="en">Awards</span><span class="ko">수상</span></h2>
+    <dl class="tl">
+      <dt>2023.11</dt>
+      <dd><b><span class="en">Outstanding Paper Award</span><span class="ko">우수논문상</span></b><span class="en">Korean Society for Bioinformatics (KSBI)</span><span class="ko">한국생명정보학회(KSBI)</span></dd>
+    </dl>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Ji-Hye Choi</span>
+    <span><span class="en">Last updated</span><span class="ko">최종 수정</span> October 2026</span>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var page = document.getElementById('page');
+  function setLang(l){
+    page.setAttribute('data-lang', l);
+    document.documentElement.lang = l;
+    document.getElementById('lang-en').setAttribute('aria-pressed', l === 'en');
+    document.getElementById('lang-ko').setAttribute('aria-pressed', l === 'ko');
+    try { localStorage.setItem('lang', l); } catch(e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch(e) {}
+  setLang(saved === 'ko' ? 'ko' : 'en');
+  document.getElementById('lang-en').addEventListener('click', function(){ setLang('en'); });
+  document.getElementById('lang-ko').addEventListener('click', function(){ setLang('ko'); });
+
+  var list = document.getElementById('pubs');
+  function setFilter(f){
+    list.setAttribute('data-filter', f);
+    document.getElementById('f-all').setAttribute('aria-pressed', f === 'all');
+    document.getElementById('f-lead').setAttribute('aria-pressed', f === 'lead');
+  }
+  document.getElementById('f-all').addEventListener('click', function(){ setFilter('all'); });
+  document.getElementById('f-lead').addEventListener('click', function(){ setFilter('lead'); });
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function show(id, focus){
+    tabs.forEach(function(tb){
+      var on = tb.getAttribute('aria-controls') === id;
+      tb.setAttribute('aria-selected', on);
+      tb.tabIndex = on ? 0 : -1;
+      document.getElementById(tb.getAttribute('aria-controls')).hidden = !on;
+      if (on && focus) tb.focus();
+    });
+  }
+  tabs.forEach(function(tb, i){
+    tb.addEventListener('click', function(){
+      var id = tb.getAttribute('aria-controls'); show(id);
+      try { history.replaceState(null, '', '#' + id); } catch(e) {}
+    });
+    tb.addEventListener('keydown', function(e){
+      var n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!n) return; e.preventDefault();
+      var next = tabs[(i + n + tabs.length) % tabs.length];
+      show(next.getAttribute('aria-controls'), true);
+    });
+  });
+  var start = (location.hash || '').slice(1);
+  show(document.getElementById(start) && document.getElementById('tab-' + start) ? start : 'research');
+})();
+</script>
+
+</body>
+</html>
